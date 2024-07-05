@@ -58,9 +58,7 @@ if __name__ == "__main__":
     定义优化器，训练网络
     '''
     q_network = QNetwork(env).to(device)
-    target_network = QNetwork(env).to(device)
-    target_network.load_state_dict(q_network.state_dict())
-    target_network.eval()
+    target_network = copy.deepcopy(q_network)
 
     optimizer = optim.Adam(q_network.parameters(), lr=learning_rate)
 
